@@ -1,0 +1,4 @@
+/* Cambia el color de fondo cuando el Switch está activado */
+.custom-switch.ant-switch-checked {
+  background-color: #09a498 !important; /* Por ejemplo, un color verde marino */
+}

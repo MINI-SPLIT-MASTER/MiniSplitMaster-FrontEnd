@@ -1,0 +1,32 @@
+import { DatePicker, Form } from 'antd'
+import { useField } from 'formik'
+
+export const DatePickerFormik = ({ label, onChange, size = 'large', style, ...props }) => {
+  const [field, meta] = useField({
+    name: props.name,
+    placeholder: props.placeholder || '',
+  })
+  return (
+    <Form.Item
+      validateStatus={meta.touched && meta.error ? 'error' : ''}
+      help={meta.touched && meta.error ? meta.error : undefined}
+      label={label}
+    >
+      <DatePicker
+        size={size}
+        style={{
+          width: '100%',
+          ...style,
+        }}
+        {...field}
+        {...props}
+        onChange={value => {
+          onChange?.(value)
+          field.onChange({
+            target: { value, name: props.name },
+          })
+        }}
+      />
+    </Form.Item>
+  )
+}
