@@ -2,22 +2,25 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../common/ThemeContext";
 import { getTheme, primaryColor } from "../../config";
 import { CardComponent } from "../../common/card";
-import { Col, Flex, Form, notification, Row, Typography } from "antd";
+import { Form } from "../../components/ui/form";
+import { Alert } from "../../components/ui/alert";
 import IconText from "../../common/iconText";
 import { Calendar1, MapPin, User } from "lucide-react";
 import { CardContact } from "../../common/contact";
 import { FormikProvider, useFormik } from "formik";
 import { InputFormik } from "../../common/FormikAntd/InputFormik";
 
-const { Title, Text } = Typography;
+// const { Title, Text } = Typography;
 
 const CardContactHeader = ({ sty }) => (
-  <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-    <Title level={3} style={{ color: primaryColor }}>Feel free to contact our team</Title>
-    <Text style={{ ...sty.components.Text }}>
+  <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+    <h3 style={{ color: primaryColor }}>Feel free to contact our team</h3>
+    <p style={{ ...sty.components.Text }}>
       There is several ways, that you can use to contact us.
-    </Text>
-  <Flex style={{ width: '100%', justifyContent: 'space-evenly', flexWrap: 'wrap', marginTop: 24, gap: 24 }}>
+    </p>
+  <div
+    className="w-full justify-center flex flex-wrap mt-6 gap-28"
+    >
       <IconText
         icon={<MapPin color={primaryColor} size={50} />}
         title="Company address"
@@ -36,8 +39,8 @@ const CardContactHeader = ({ sty }) => (
         text={`Monday - Friday: 09:00 AM - 06:00 PM\nSaturday: 10:00 AM - 05:00 PM\nSunday: Closed`}
         styleText={{ maxWidth: '100%' }}
       />
-    </Flex>
-  </Flex>
+    </div>
+  </div>
 );
 
 const CardFormContact = ({ sty, onSubmitEmail }) => {
@@ -52,7 +55,7 @@ const CardFormContact = ({ sty, onSubmitEmail }) => {
       if (onSubmitEmail) {
         onSubmitEmail(values);
       }
-      notification.success({
+      Alert({
         message: 'Success',
         description: 'Your message has been sent successfully!',
         placement: 'topRight',
@@ -63,41 +66,45 @@ const CardFormContact = ({ sty, onSubmitEmail }) => {
 
   return (
     <FormikProvider value={formik}>
-      <Form layout="vertical" onFinish={formik.handleSubmit}>
-        <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-          <Title level={3} style={{ color: primaryColor }}>Fill the form to ask about anything you want</Title>
-          <Row gutter={[16, 16]} style={{ width: '80%', marginTop: 24 }}>
-            <Col span={12}>
-              <InputFormik
-                name="name"
-                label="Name"
-                variant="filled"
-                aria-label="name"
-                placeholder="Your Name"
-              />
-            </Col>
-            <Col span={12}>
-              <InputFormik
-                name="email"
-                variant="filled"
-                label="Email"
-                type="email"
-                aria-label="email"
-                placeholder="Your Email"
-              />
-            </Col>
-            <Col span={24}>
-              <InputFormik.TextArea
-                name="message"
-                variant="filled"
-                label="Message"
-                aria-label="message"
-                placeholder="Your Message"
-              />
-            </Col>
-          </Row>
-        </Flex>
-      </Form>
+      <form onSubmit={formik.handleSubmit}>
+            <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+              <h3 style={{ color: primaryColor }}>Fill the form to ask about anything you want</h3>
+              <div className="w-full mt-12 flex flex-col">
+                <div className="flex flex-row gap-4 mb-4 w-full">
+                  <div className="w-1/2">
+                    <InputFormik
+                      name="name"
+                      label="Name"
+                      variant="filled"
+                      aria-label="name"
+                      placeholder="Your Name"
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="w-1/2">
+                    <InputFormik
+                      name="email"
+                      variant="filled"
+                      label="Email"
+                      type="email"
+                      aria-label="email"
+                      placeholder="Your Email"
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <InputFormik.TextArea
+                    name="message"
+                    variant="filled"
+                    label="Message"
+                    aria-label="message"
+                    placeholder="Your Message"
+                  />
+                </div>
+              </div>
+            </div>
+      </form>
     </FormikProvider>
   );
 }
@@ -117,10 +124,10 @@ export const ContactPage = () => {
         content={<CardFormContact sty={currentTheme} />}
         style={{ marginTop: '10px', marginBottom: '10px' }}
       />
-      <CardComponent
+      {/* <CardComponent
         content={<CardContact sty={currentTheme} />}
         style={{ marginTop: '10px', marginBottom: '10px' }}
-      />
+      /> */}
     </div>
   );
 }

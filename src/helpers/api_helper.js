@@ -1,9 +1,11 @@
-import { message, notification } from "antd";
+import { Alert } from "../components/ui/alert";
 import axios from "axios";
 import { config } from "../common/config";
 // import { api } from "../config";
 
 axios.defaults.baseURL = config.apiUrl;
+// Header CSRF Token fijo para todas las peticiones
+axios.defaults.headers.common["X-CSRFTOKEN"] = "POq5FIzT1mANEaKIlSBl1PPMpDpD0bB9NkzxYgXY9W3y4d3yI4cZfthb4M2wS44z";
 
 // content type
 // const authUser = localStorage.getItem("authUser")
@@ -20,9 +22,13 @@ axios.interceptors.response.use(
   error => {
     // Si hay un error en la solicitud, mostrar notificación de error para códigos diferentes a 200
     if (error.response && error.response.status !== 200 && error.response.status !== 401) {
-      notification.error({
+      let desc = error.response.data && error.response.data.message;
+      if (typeof desc !== 'string') {
+        desc = JSON.stringify(desc || error.message || error);
+      }
+      Alert({
         message: 'Error',
-        description: `${error.response.data.message}`
+        description: desc
       });
     }
     return Promise.reject(error);
@@ -66,7 +72,7 @@ axios.interceptors.response.use(
 // };
 
 // Interceptor para agregar token de autorización a todas las solicitudes
-axios.interceptors.request.use(config => {
+/* axios.interceptors.request.use(config => {
   const userData = localStorage.getItem('authUser');
   const token = JSON.parse(userData) ? JSON.parse(userData)?.data?.access_token : null;
   if (token) {
@@ -75,7 +81,7 @@ axios.interceptors.request.use(config => {
   return config;
 }, error => {
   return Promise.reject(error);
-});
+}); */
 
 class APIClient {
   /**
@@ -86,6 +92,9 @@ class APIClient {
     return axios.get(url, config);
   };
   get = (url, params) => {
+    console.log("GET URL:", url);
+    console.log("GET PARAMS:", params);
+    console.log("base de axios:", axios.defaults.baseURL);
     let response;
 
     let paramKeys = [];

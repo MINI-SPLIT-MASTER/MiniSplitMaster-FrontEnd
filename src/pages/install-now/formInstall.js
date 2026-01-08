@@ -1,4 +1,8 @@
-import { Button, Col, Flex, Form, notification, Row, Slider, Steps, theme, Typography } from "antd";
+import { Alert } from "../../components/ui/alert";
+import { Stepper } from "../../components/ui/stepper";
+import { Button } from "../../components/ui/button";
+import { Form } from "../../components/ui/form";
+import { getTheme } from "../../config";
 import { FormikProvider, useFormik } from "formik";
 import { InputFormik } from "../../common/FormikAntd/InputFormik";
 import { primaryColor } from "../../config";
@@ -6,15 +10,17 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { SliderFormik } from "../../common/FormikAntd/SliderFormik";
 import { UnitStyle } from "../../common/UnitStyle";
+import { useFetch } from "../../common/hooks/useFetch";
+import { getMiniSplits } from "../../helpers/backend_helper";
 
-const { Title, Text } = Typography;
+// const { Title, Text } = Typography;
 
 const DistanceRoomsizeStep = ({sty}) => {
   return (
-    <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-      <Text style={{ fontSize: '16px', marginTop: 24 }}>Indicates the size of the room and the distance between the Indoor and Outdoor unit.</Text>
-      <Row gutter={[16, 16]} style={{ width: '80%', marginTop: 24,  }}>
-        <Col span={12}>
+    <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <p style={{ fontSize: '16px', marginTop: 24 }}>Indicates the size of the room and the distance between the Indoor and Outdoor unit.</p>
+      <div style={{ width: '80%', marginTop: 24,  }} className="flex flex-row mx-auto">
+        <div style={{ display: 'flex', gap: 16 }}>
           <SliderFormik
             name="roomsize"
             label="Room Size (square feet)"
@@ -29,8 +35,8 @@ const DistanceRoomsizeStep = ({sty}) => {
             max={1200}
             step={5}
           />
-        </Col>
-        <Col span={12}>
+        </div>
+        <div style={{ display: 'flex', gap: 16 }}>
           <SliderFormik
             sty={sty}
             name="distance"
@@ -45,29 +51,29 @@ const DistanceRoomsizeStep = ({sty}) => {
             max={150}
             step={5}
           />
-        </Col>
-      </Row>
-    </Flex>
+        </div>
+      </div>
+    </div>
   );
 }
 
 const UnitsStep = ({sty}) => {
   return (
-    <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-      <Text style={{ fontSize: '16px', marginTop: 24 }}> Select the unit.</Text>
-      <Row gutter={[16, 16]} style={{ width: '80%', marginTop: 24,  }}>
-        <Col span={24}>
+    <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <p style={{ fontSize: '16px', marginTop: 24 }}> Select the unit.</p>
+      <div style={{ width: '80%', marginTop: 24,  }}>
+        <div style={{ display: 'flex', gap: 16 }}>
           <UnitStyle />
-        </Col>
-      </Row>
-    </Flex>
+        </div>
+      </div>
+    </div>
   );
 }
 
 const OthersStep = () => {
   return (
-    <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-      <Text>Select where the condenser will be mounted and whether it requires city permission:</Text>
+    <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <p>Select where the condenser will be mounted and whether it requires city permission:</p>
       <InputFormik
         name="condenser"
         label="Condenser"
@@ -75,14 +81,14 @@ const OthersStep = () => {
         aria-label="condenser"
         placeholder="Enter condenser details"
       />
-    </Flex>
+    </div>
   );
 }
 
 const ScheduleStep = () => {
   return (
-    <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-      <Text>Schedule your appointment on the day and time that works best for you:</Text>
+    <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <p>Schedule your appointment on the day and time that works best for you:</p>
       <InputFormik
         name="schedule"
         label="Schedule"
@@ -90,14 +96,14 @@ const ScheduleStep = () => {
         aria-label="schedule"
         placeholder="Enter schedule"
       />
-    </Flex>
+    </div>
   );
 }
 
 const FormStep = () => {
   return (
-    <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-      <Text>Fill out the form with your information and make the payment:</Text>
+    <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <p>Fill out the form with your information and make the payment:</p>
       <InputFormik
         name="form"
         label="Form"
@@ -105,7 +111,7 @@ const FormStep = () => {
         aria-label="form"
         placeholder="Enter form details"
       />
-    </Flex>
+    </div>
   );
 }
 
@@ -134,17 +140,29 @@ const steps = ({sty}) => {
 
 export const FormInstall = ({sty, onSubmitForm}) => {
   const navigate = useNavigate();
+  const theme = getTheme();
   const [current, setCurrent] = useState(0);
-  const { token } = theme.useToken();
+  const [alert, setAlert] = useState({ type: '', message: '' });
+  const { token } = theme;
   const next = () => {
     setCurrent(current + 1);
   };
   const prev = () => {
     setCurrent(current - 1);
   };
-  console.log("steps", steps({sty}))
 
-  const items = steps({sty}).map(item => ({ key: item.title, title: item.title }));
+  // const minisplitsQuery = useFetch({
+  //   fetch: getMiniSplits,
+  //   variables: {},
+  //   isGet: true,
+  //   transformData: res => res,
+  //   initialValues: [],
+  //   onSuccess: data => data,
+  // });
+
+  // Adaptar para Stepper seguro y API correcta
+  const safeSteps = Array.isArray(steps({sty})) ? steps({sty}) : [];
+  const stepperSteps = safeSteps.map((item, idx) => ({ label: `Paso ${idx + 1}`, ...item }));
 
   const formik = useFormik({
     initialValues: {
@@ -158,13 +176,14 @@ export const FormInstall = ({sty, onSubmitForm}) => {
       email: '',
       message: ''
     },
-    onSubmit: values => {
-      notification.success({
-        message: 'Success',
-        description: 'Your message has been sent successfully!',
-        placement: 'topRight',
-      });
-      formik.resetForm();
+    onSubmit: (values, { resetForm }) => {
+      try {
+        // Simula éxito
+        setAlert({ type: 'success', message: 'Your message has been sent successfully!' });
+        resetForm();
+      } catch (error) {
+        setAlert({ type: 'error', message: typeof error === 'string' ? error : (error?.message || JSON.stringify(error)) });
+      }
     },
   });
 
@@ -173,32 +192,48 @@ export const FormInstall = ({sty, onSubmitForm}) => {
     textAlign: 'center',
     width: '90%',
     margin: '10px auto',
-    // color: token.colorTextTertiary,
-    // backgroundColor: token.colorFillAlter,
-    // borderRadius: token.borderRadiusLG,
-    // border: `1px dashed ${token.colorBorder}`,
     marginTop: 16,
   };
 
   return (
     <FormikProvider value={formik}>
+      {alert.type === 'success' && (
+        <Alert>
+          <strong>Success:</strong> {alert.message}
+        </Alert>
+      )}
+      {alert.type === 'error' && (
+        <Alert variant="destructive">
+          <strong>Error:</strong> {alert.message}
+        </Alert>
+      )}
       <Form layout="vertical" onFinish={formik.handleSubmit}>
-        <Title level={2} style={{ color: primaryColor, textAlign: 'center' }}>Book your installation</Title>
-        <Steps current={current} items={items} />
-        <div style={contentStyle}>{steps({sty})[current].content}</div>
+        <h2 style={{ color: primaryColor, textAlign: 'center' }}>Book your installation</h2>
+        <Stepper steps={stepperSteps} activeStep={current} />
+        <div style={contentStyle}>{safeSteps[current]?.content || ''}</div>
         <div style={{ marginTop: 24 }}>
           {current > 0 && (
             <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
               Previous
             </Button>
           )}
-          {current < steps({sty}).length - 1 && (
+          {current < safeSteps.length - 1 && (
             <Button type="primary" onClick={() => next()}>
               Next
             </Button>
           )}
-          {current === steps({sty}).length - 1 && (
-            <Button type="primary" onClick={() => console.log("Submit form", formik.values)}>
+          {current === safeSteps.length - 1 && (
+            <Button type="primary" onClick={async () => {
+              try {
+                // Si el submit es asíncrono, espera el resultado
+                const maybePromise = formik.handleSubmit();
+                if (maybePromise && typeof maybePromise.then === 'function') {
+                  await maybePromise;
+                }
+              } catch (error) {
+                setAlert({ type: 'error', message: typeof error === 'string' ? error : (error?.message || JSON.stringify(error)) });
+              }
+            }}>
               Book your installation
             </Button>
           )}

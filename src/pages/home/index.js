@@ -1,4 +1,4 @@
-import { Button, Flex, Row, Typography } from "antd";
+import { Button } from "../../components/ui/button";
 import { CardComponent } from "../../common/card";
 import { useTheme } from "../../common/ThemeContext";
 import { getTheme } from "../../config";
@@ -11,22 +11,15 @@ import "../../images/steps.png"
 import { CardContact } from "../../common/contact";
 import { StepsCard } from "./stepsCard";
 
-const { Text, Title } = Typography;
+// const { Text, Title } = Typography;
 
 const CardVideo = ({sty}) => (
-  <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-    <Title level={3} style={{ color: primaryColor }}>What is a Mini Split?</Title>
-    <Text style={{ ...sty.components.Text }}>A mini-split (also known as a ductless mini-split) is a type of heating and cooling system commonly used in homes and buildings. Unlike traditional HVAC systems that rely on ductwork to distribute air, mini-split systems are ductless.</Text>
-    <div style={{
-      width: '80%',
-      background: 'black',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: '8px',
-      marginTop: '15px',
-      overflow: 'hidden',
-    }}>
+  <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+    <h3 style={{ color: primaryColor }}>What is a Mini Split?</h3>
+    <p style={{ ...sty.components.Text }}>A mini-split (also known as a ductless mini-split) is a type of heating and cooling system commonly used in homes and buildings. Unlike traditional HVAC systems that rely on ductwork to distribute air, mini-split systems are ductless.</p>
+    <div 
+      className="w-[80%] bg-black flex justify-center items-center rounded-lg mt-4 overflow-hidden mx-auto"
+      >
       <video
         width="100%"
         height="500"
@@ -36,14 +29,16 @@ const CardVideo = ({sty}) => (
         <source src="https://minisplitmaster.us/wp-content/uploads/2025/06/video_2025-06-25_14-40-14.mp4#t=0.701" type="video/mp4" />
       </video>
     </div>
-  </Flex>
+  </div>
 )
 
 const CardAbout = ({sty}) => (
-  <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-    <Title level={3} style={{ color: primaryColor }}>ABOUT MINI SPLIT TECHNOLOGY</Title>
-    <Text style={{ ...sty.components.Text }}>Mini split systems are a modern, energy-efficient solution for heating and cooling individual rooms or zones in your home. Unlike traditional HVAC systems, they don’t rely on bulky ductwork, making them ideal for retrofits, room additions, or spaces where ducts aren’t feasible.</Text>
-    <Flex style={{ width: '100%', justifyContent: 'center', gap: 24, flexWrap: 'wrap', marginTop: 24 }}>
+  <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+    <h3 style={{ color: primaryColor }}>ABOUT MINI SPLIT TECHNOLOGY</h3>
+    <p style={{ ...sty.components.Text }}>Mini split systems are a modern, energy-efficient solution for heating and cooling individual rooms or zones in your home. Unlike traditional HVAC systems, they don’t rely on bulky ductwork, making them ideal for retrofits, room additions, or spaces where ducts aren’t feasible.</p>
+    <div 
+    className="w-full flex justify-center gap-6 flex-wrap mt-6"
+      >
       <IconText
         icon={<Leaf color={primaryColor} size={50} />}
         title="Energy Efficiency"
@@ -74,16 +69,16 @@ const CardAbout = ({sty}) => (
         text="Many systems use environmentally friendly refrigerants."
         styleText={{ maxWidth: '80%' }}
       />
-    </Flex>
-  </Flex>
+    </div>
+  </div>
 )
 
 const CardHowItWorks = ({sty}) => (
-  <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-    <Title level={3} style={{ color: primaryColor }}>How it works</Title>
-    <Text style={{ ...sty.components.Text }}>Simple Steps to Get Your Mini Split Installed.</Text>
+  <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+    <h3 style={{ color: primaryColor }}>How it works</h3>
+    <p style={{ ...sty.components.Text }}>Simple Steps to Get Your Mini Split Installed.</p>
     <img src={require("../../images/steps.png")} alt="Steps" style={{ width: '90%', marginTop: 10 }} />
-  </Flex>
+  </div>
 )
 
 export const HomePage = () => {
@@ -92,10 +87,12 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div
+      className="w-full h-auto"
+    >
       <div style={{ position: 'relative', width: '100%' }}>
         <img src={bgPage} alt="ChatGPT" style={{ width: "100%", maxHeight: "85vh", objectFit: "cover", display: 'block' }} />
-        <Flex vertical style={{
+        <div style={{
           position: 'absolute',
           top: '30%',
           left: '50%',
@@ -106,9 +103,9 @@ export const HomePage = () => {
           pointerEvents: 'none',
         }}>
           <div style={{ pointerEvents: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-            <Text style={{ fontSize: '16px', color: 'black' }}>Ready for a Comfort Upgrade?</Text>
-            <Text  style={{ fontSize: '24px', fontWeight: 'bold', color: 'black'}}>Get Your Mini Split Installed Today!</Text>
-            <Text  style={{ color: "white", backgroundColor: 'rgba(0, 0, 0, 0.19)', width: '100%', fontWeight: 'bold', fontSize: '18px', padding: '12px 16px' }}>All equipment includes installation</Text>
+            <p style={{ fontSize: '16px', color: 'black' }}>Ready for a Comfort Upgrade?</p>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'black'}}>Get Your Mini Split Installed Today!</h2>
+            <p style={{ color: "white", backgroundColor: 'rgba(0, 0, 0, 0.19)', width: '100%', fontWeight: 'bold', fontSize: '18px', padding: '12px 16px' }}>All equipment includes installation</p>
             <Button
               type="primary" 
               style={{ 
@@ -122,7 +119,7 @@ export const HomePage = () => {
               Book your installation
             </Button>
           </div>
-        </Flex>
+        </div>
       </div>
       <CardComponent
         content={<CardVideo sty={currentTheme} />}
@@ -134,12 +131,12 @@ export const HomePage = () => {
       />
       <CardComponent
         content={<StepsCard sty={currentTheme} />}
-        style={{ marginTop: '10px' }}
-      />
-      <CardComponent
-        content={<CardContact sty={currentTheme} />}
         style={{ marginTop: '10px', marginBottom: '10px' }}
       />
+      {/* <CardComponent
+        content={<CardContact sty={currentTheme} />}
+        style={{ marginTop: '10px', marginBottom: '10px' }}
+      /> */}
     </div>
   );
 };

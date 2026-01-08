@@ -1,45 +1,50 @@
-import { Form, Input } from 'antd'
-import { useField } from 'formik'
+// import { Form, Input } from 'antd'
+import { Input } from '../../components/ui/input';
+import { useField } from 'formik';
 
-export const InputFormik = ({ label, onChange, size = 'large', withFormItem = true, ...props }) => {
+export const InputFormik = ({ label, onChange, withFormItem = true, ...props }) => {
   const [field, meta] = useField({
     name: props.name,
     type: props.type || 'text',
     placeholder: props.placeholder || '',
-  })
+  });
 
   const inputElement = (
     <Input
-      size={size}
       {...field}
       {...props}
       onChange={e => {
-        onChange?.(e)
-        field.onChange(e)
+        onChange?.(e);
+        field.onChange(e);
       }}
     />
-  )
+  );
 
   if (!withFormItem) {
-    return inputElement
+    return inputElement;
   }
 
   return (
-    <Form.Item
-      validateStatus={meta.touched && meta.error ? 'error' : ''}
-      help={meta.touched && meta.error ? meta.error : undefined}
-      label={label}
-    >
+    <div style={{ marginBottom: 16 }}>
+      {label && (
+        <label
+          htmlFor={props.name}
+          style={{ display: 'block', marginBottom: 4, textAlign: 'left' }}
+        >
+          {label}
+        </label>
+      )}
       {inputElement}
-    </Form.Item>
-  )
-}
+      {meta.touched && meta.error && (
+        <div style={{ color: 'red', fontSize: 12, marginTop: 4 }}>{meta.error}</div>
+      )}
+    </div>
+  );
+};
 
 const InputTextAreaFormik = ({
   label,
   onChange: _,
-  size = 'large',
-  style,
   withFormItem = true,
   ...props
 }) => {
@@ -47,50 +52,72 @@ const InputTextAreaFormik = ({
     name: props.name,
     type: props.type || 'text',
     placeholder: props.placeholder || '',
-  })
+  });
 
   const inputElement = (
     <Input.TextArea
-      size={size}
-      style={{ width: '100%', ...style }}
-      status={meta.touched && meta.error ? 'error' : ''}
       {...field}
       {...props}
     />
-  )
+  );
 
   if (!withFormItem) {
-    return inputElement
+    return inputElement;
   }
 
   return (
-    <Form.Item
-      validateStatus={meta.touched && meta.error ? 'error' : ''}
-      help={meta.touched && meta.error ? meta.error : undefined}
-      label={label}
-      style={{ width: '100%' }}
-    >
+    <div style={{ marginBottom: 16 }}>
+      {label && (
+        <label
+          htmlFor={props.name}
+          style={{ display: 'block', marginBottom: 4, textAlign: 'left' }}
+        >
+          {label}
+        </label>
+      )}
       {inputElement}
-    </Form.Item>
-  )
-}
+      {meta.touched && meta.error && (
+        <div style={{ color: 'red', fontSize: 12, marginTop: 4 }}>{meta.error}</div>
+      )}
+    </div>
+  );
+};
 
-const InputPasswordFormik = ({ label, onChange: _, size = 'large', ...props }) => {
+const InputPasswordFormik = ({ label, onChange: _, withFormItem = true, ...props }) => {
   const [field, meta] = useField({
     name: props.name,
-    type: props.type || 'text',
+    type: 'password',
     placeholder: props.placeholder || '',
-  })
+  });
+
+  const inputElement = (
+    <Input.Password
+      {...field}
+      {...props}
+    />
+  );
+
+  if (!withFormItem) {
+    return inputElement;
+  }
+
   return (
-    <Form.Item
-      validateStatus={meta.touched && meta.error ? 'error' : ''}
-      help={meta.touched && meta.error ? meta.error : undefined}
-      label={label}
-    >
-      <Input.Password size={size} {...field} {...props} />
-    </Form.Item>
-  )
-}
+    <div style={{ marginBottom: 16 }}>
+      {label && (
+        <label
+          htmlFor={props.name}
+          style={{ display: 'block', marginBottom: 4, textAlign: 'left' }}
+        >
+          {label}
+        </label>
+      )}
+      {inputElement}
+      {meta.touched && meta.error && (
+        <div style={{ color: 'red', fontSize: 12, marginTop: 4 }}>{meta.error}</div>
+      )}
+    </div>
+  );
+};
 
 InputFormik.Password = InputPasswordFormik
 InputFormik.TextArea = InputTextAreaFormik
