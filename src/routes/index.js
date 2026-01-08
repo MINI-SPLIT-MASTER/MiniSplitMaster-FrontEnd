@@ -15,7 +15,6 @@ export const RoutesComponents = () => {
         <Routes>
           <Route>
             { publicRoutes.map((route, idx) => {
-              console.log(route);
               return (
               <Route
                 key={idx}

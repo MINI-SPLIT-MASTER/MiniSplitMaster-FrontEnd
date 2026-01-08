@@ -1,4 +1,3 @@
-import { Footer } from "antd/es/layout/layout"
 import { config } from "./common/config"
 
 export const primaryColor = config.env === "dev" ? '#7db788ff' : '#09a498'
@@ -94,9 +93,9 @@ const themecolor = {
       padding: '12px 16px',
     },
     Footer: {
-      background: '#f0f0f0',
+      background: '#ffffffff',
       color: '#000000ff',
-      padding: '12px 16px',
+      padding: '10px 16px',
     },
     Button: {
       colorBorder: '#d9d9d9',
@@ -249,13 +248,13 @@ const themecolor = {
     Card: {
       actionsBg: '#ffffff',
       actionsLiMargin: '12px 0',
-      backgroundCard: '#eeeeeeff',
+      background: '#ffffffff',
       headerFontSize: 15,
       headerFontSizeSM: 14,
       headerHeight: 55,
       headerHeightSM: 38,
       tabsMarginBottom: -25,
-      borderRadiusLG: 16,
+      borderRadiusLG: 30,
     },
     Carousel: {
       dotActiveWidth: 24,
