@@ -1,17 +1,19 @@
 import { Slider } from '../../components/ui/slider'
 import { Input } from '../../components/ui/input'
 import { useField } from 'formik'
+import RoomVisualizer from '../RoomVisualizer'
 
-export const SliderFormik = ({ label, onChange, size = 'large', imagen, seeNumber = false, card = false, sty, style, ...props }) => {
+export const SliderFormik = ({ label, onChange, size = 'large', imagen , seeNumber = false, card = false, sty, style, ...props }) => {
   const [field, meta] = useField({
     name: props.name,
     placeholder: props.placeholder || '',
   })
 
   return (
-    <div style={{ background: card ? sty.components.Card.backgroundCard : 'transparent', padding: card ? '10px' : '0', borderRadius: card ? '10px' : '0' }}>
-      <img src={imagen} alt={label} style={{ width: '60%', marginBottom: 20, marginTop: 20, borderRadius: '10px' }} className='mx-auto'/>
-      <div style={{ marginLeft: '10px', marginBottom: 16 }}>
+    <div className={card ? `${sty.components.Card} p-[10px] rounded-[10px] w-full` : 'bg-transparent w-full'}>
+      {imagen && <img src={imagen} alt={label} className='mx-auto min-h-[200px] w-[60%] my-[20px] rounded-[10px]'/>}
+      <RoomVisualizer value={Number(field.value) || 0} />
+      <div style={{ marginBottom: 16 }}>
         {label && <label htmlFor={props.name} style={{ display: 'block', marginBottom: 0, textAlign: 'left' }}>{label}</label>}
         {seeNumber && field.value !== undefined ?
           <Input value={field.value}

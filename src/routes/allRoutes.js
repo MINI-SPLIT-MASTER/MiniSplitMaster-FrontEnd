@@ -3,6 +3,9 @@ import { PERMISSIONS_SECTIONS as permissions } from '../common/hooks/useUserPerm
 import { HomePage } from '../pages/home'
 import { ContactPage } from '../pages/contact'
 import { InstallNowPage } from '../pages/install-now'
+import { PrivacyPolicyPage } from '../pages/legal/privacyPolicy'
+import { TermsConditionsPage } from '../pages/legal/termsConditions'
+import { RefundPolicyPage } from '../pages/legal/refundPolicy'
 // import { Forgetpassword } from '../pages/Authentication/forgetpassword'
 // import { Signin } from '../pages/Authentication/login'
 // import { Logout } from '../pages/Authentication/logout'
@@ -34,6 +37,9 @@ const publicRoutes = [
   { path: '/install-now', component: (<InstallNowPage />) },
   { path: '/contact', component: <ContactPage /> },
   { path: '/orders', component: (<span>Orders</span>) },
+  { path: '/privacy-policy', component: (<PrivacyPolicyPage />) },
+  { path: '/terms-and-conditions', component: (<TermsConditionsPage />) },
+  { path: '/refund-policy', component: (<RefundPolicyPage />) },
 
 ]
 

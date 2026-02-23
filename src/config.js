@@ -1,3 +1,4 @@
+import { hover } from "@testing-library/user-event/dist/hover"
 import { config } from "./common/config"
 
 export const primaryColor = config.env === "dev" ? '#7db788ff' : '#09a498'
@@ -92,19 +93,8 @@ const themecolor = {
       color: '#000000ff',
       padding: '12px 16px',
     },
-    Footer: {
-      background: '#ffffffff',
-      color: '#000000ff',
-      padding: '10px 16px',
-    },
-    Button: {
-      colorBorder: '#d9d9d9',
-      inputPlaceholderColor: '#000000',
-      colorTextPlaceholder: '#000000',
-      inputBorderColor: '#000000',
-      backgroundColor: primaryColor,
-      color: '#fff',
-    },
+    Footer: `bg-[#ffffff] text-[#000000ff] py-[10px] px-[16px]`,
+    Button: `text-[#fff] shadow hover:!bg-[#087f70] hover:!text-[#fff] hover:!font-[700] transition-all duration-600`,
     Form: {
       labelMarginBottom: '0.5rem',
       marginLG: '1rem',
@@ -122,16 +112,8 @@ const themecolor = {
       itemSelectedBg: '#EEF2FF',
       menuBorderColor: '#eff2f7',
     },
-    Typography: {
-      titleMarginBottom: '1rem',
-      titleMarginTop: '0', // Add the titleMarginTop property here
-    },
-    Text: {
-      color: '#000000',
-      fontSize: '15px',
-      lineHeight: '1.5',
-      margin: '0 70px',
-    },
+    Typography: ``,
+    Text: `text-[#000000] font-[15px] leading-[1.5] mx-[70px]`,
     //navigation
     Anchor: {
       linkPaddingBlock: 4,
@@ -245,17 +227,7 @@ const themecolor = {
       monthControlWidth: 80,
       yearControlWidth: 90,
     },
-    Card: {
-      actionsBg: '#ffffff',
-      actionsLiMargin: '12px 0',
-      background: '#ffffffff',
-      headerFontSize: 15,
-      headerFontSizeSM: 14,
-      headerHeight: 55,
-      headerHeightSM: 38,
-      tabsMarginBottom: -25,
-      borderRadiusLG: 30,
-    },
+    Card: `bg-[#ffffff] shadow-md hover:shadow-lg transition-shadow duration-300`,
     Carousel: {
       dotActiveWidth: 24,
       dotHeight: 3,
@@ -469,19 +441,8 @@ const darkthemecolors = {
       padding: '12px 16px',
       background: '#2f2f2fff',
     },
-    Footer: {
-      background: '#1b1b1b',
-      color: '#fff',
-      padding: '12px 16px',
-    },
-    Button: {
-      colorBorder: '#4d4d4d',
-      inputPlaceholderColor: '#fff',
-      colorTextPlaceholder: '#fff',
-      inputBorderColor: '#4d4d4d',
-      backgroundColor: primaryColor,
-      color: '#fff',
-    },
+    Footer: `bg-[#1b1b1b] text-[#fff] py-[10px] px-[16px]`,
+    Button:  `text-[#fff] shadow hover:!bg-[#087f70] hover:!text-[#fff] hover:!font-[700] transition-all duration-600`,
     Form: {
       labelMarginBottom: '0.5rem',
       marginLG: '1rem',
@@ -504,12 +465,7 @@ const darkthemecolors = {
       titleMarginTop: '0',
       color: '#fff',
     },
-    Text: {
-      color: '#ffffffff',
-      fontSize: '15px',
-      lineHeight: '1.5',
-      margin: '0 70px',
-    },
+    Text: `text-[#ffffffff] font-[15px] leading-[1.5] mx-[70px]`,
     //navigation
     Anchor: {
       linkPaddingBlock: 4,
@@ -623,19 +579,7 @@ const darkthemecolors = {
       monthControlWidth: 80,
       yearControlWidth: 90,
     },
-    Card: {
-      actionsBg: '#2a2f37',
-      backgroundColor: '#444444ff',
-      backgroundCard: '#5e5e5eff',
-      actionsLiMargin: '12px 0',
-      headerFontSize: 15,
-      headerFontSizeSM: 14,
-      headerHeight: 55,
-      headerHeightSM: 38,
-      tabsMarginBottom: -25,
-      borderRadiusLG: 16,
-      border: 'none',
-    },
+    Card: `bg-[#444444ff] shadow-md hover:shadow-lg transition-shadow duration-300`,
     Carousel: {
       dotActiveWidth: 24,
       dotHeight: 3,
@@ -752,112 +696,6 @@ const darkthemecolors = {
     },
   },
 }
-
-/* const customStyle = {
-  token: {
-    //Spacing and sizes
-    controlHeight: 35,
-    controlHeightLG: 40,
-    controlHeightSM: 24,
-    controlOutlineWidth: 2,
-    fontSizeIcon: 12,
-    fontSize: 14,
-    fontSizeHeading1: 38,
-    fontSizeHeading2: 30,
-    fontSizeHeading3: 24,
-    fontSizeHeading4: 20,
-    fontSizeHeading5: 16,
-    fontSizeLG: 16,
-    fontWeightStrong: 600,
-    linkDecoration: 'none',
-    linkHoverDecoration: 'none',
-    lineType: 'solid',
-    lineWidth: 1,
-    lineWidthBold: 2,
-    lineWidthFocus: 4,
-    sizePopupArrow: 18,
-    zIndexPopupBase: 1000,
-    controlPaddingHorizontal: 12,
-    controlPaddingHorizontalSM: 8,
-    screenLGMax: 1199,
-    screenMDMax: 991,
-    screenSMMax: 767,
-    screenXSMax: 575,
-
-    margin: 24,
-    marginSM: 20,
-    marginXS: 14,
-    marginXXS: 4,
-    borderRadiusXS: 2,
-    borderRadiusSM: 4,
-    borderRadius: 8,
-    borderRadiusLG: 10,
-    paddingButton: 16,
-    paddingLG: 22,
-    paddingSM: 12,
-    paddingXS: 8,
-    paddingXXS: 4,
-
-    //colors Palette
-    colorBorder: '#000000',
-    inputPlaceholderColor: '#000000',
-    inputBorderColor: '#000000',
-    nonauthBg: '#eff2f7',
-    colorBgContainer: '#fff',
-    colorBgContainerDisabled: 'rgba(0, 0, 0, 0.04)',
-    colorBgLayout: '#F4F5FA',
-    colorText: '#000000',
-    colorTextDisabled: '#adb5bd',
-    colorTextPlaceholder: '#adb5bd',
-    colorTextQuaternary: 'rgba(0, 0, 0, 0.45)',
-    colorTextHeading: 'rgba(0, 0, 0, 0.88)',
-    fontFamily: '"Inter", sans-serif',
-    colorFillAlter: 'rgba(0, 0, 0, 0.02)',
-    colorFill: 'rgba(0, 0, 0, 0.15)', // skeleton overlay bg
-    colorFillContent: 'rgba(0, 0, 0, 0.06)', // skeleton bg
-    colorFillQuaternary: 'rgba(0, 0, 0, 0.02)',
-    colorFillSecondary: 'rgba(0, 0, 0, 0.06)', // progress's bar bg
-    colorHighlight: '#ff4d4f',
-    colorBorderSecondary: '#f0f0f0',
-    colorError: '#dc3545',
-    colorSuccess: '#55c27f',
-    colorSuccessBg: '#ecfff3',
-    colorPrimary: primaryColor,
-    colorPrimaryBg: 'rgba(67, 142, 255, 0.10)',
-    colorInfo: '#4ab0c1',
-    colorInfoBg: '#dbeff3',
-    colorDanger: '#ff6c6c',
-    colorDangerBg: '#ffe2e2',
-    textMuted: '#C7C7C7',
-    colorWarning: '#f1be46',
-    colorWarningBg: '#fffbe6',
-    colorTextCode: '#f7649f',
-    colorLink: primaryColor,
-    colorLinkActive: primaryColor,
-    colorLinkHover: primaryColor,
-    colorDark: '#000000',
-    colorDarkBg: '#e9ebec',
-    controlItemBgHover: 'rgba(0, 0, 0, 0.04)',
-    bglight: '#000',
-    colorSecondary: '#8561f9',
-    colorSecondaryBg: '#e7dffe',
-    backgroundHeader: '#ffffff',
-    backgroundFooter: '#f0f0f0',
-    colorBorderCard: '#eee',
-    backgroundCard: '#fff',
-    primaryColor: '#09a498',
-
-
-    // heading
-
-    h1: 34,
-    h2: 30,
-    h3: 24,
-    h4: 20,
-    h5: 18,
-    h6: 16,
-  },
-} */
 
 const getTheme = theme => (theme === 'dark' ? darkthemecolors : themecolor)
 
