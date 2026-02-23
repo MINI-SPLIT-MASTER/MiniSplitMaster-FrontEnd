@@ -54,11 +54,11 @@ export const StepsCard = ({sty}) => {
     <div className="w-full h-auto relative">
       <Stepper steps={safeSteps} activeStep={current} />
       <div style={contentStyle} className='rounded-xl'>{safeSteps[current]?.content || ''}</div>
-      <div style={{ marginTop: 24 }} className="flex w-full justify-between items-center">
+      <div className="flex w-full justify-between items-center mt-[24px]">
         {/* Botón Previous a la izquierda */}
         <div>
           {current > 0 && (
-            <Button style={{ margin: '0 8px' }} onClick={prev}>
+            <Button style={{ margin: '0 8px', backgroundColor: '#BAADAB' }} onClick={prev} className="text-white hover:!bg-[#a79896] hover:!font-[700] transition-colors duration-600">
               Previous
             </Button>
           )}
@@ -66,12 +66,12 @@ export const StepsCard = ({sty}) => {
         {/* Botón Next o Book a la derecha */}
         <div>
           {current < safeSteps.length - 1 && (
-            <Button type="primary" onClick={next}>
+            <Button variant="default" onClick={next} className={theme.components.Button} style={{ backgroundColor: primaryColor }}>
               Next
             </Button>
           )}
           {current === safeSteps.length - 1 && (
-            <Button type="primary" onClick={() => navigate('/install-now')}>
+            <Button variant="default" onClick={() => navigate('/install-now')} className={theme.components.Button} style={{ backgroundColor: primaryColor }}>
               Book your installation
             </Button>
           )}

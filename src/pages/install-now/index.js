@@ -9,14 +9,14 @@ export const InstallNowPage = () => {
   const currentTheme = getTheme(theme);
 
   return (
-  <div style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+  <div className="flex flex-col justify-center items-center text-center">
     <CardComponent
       content={<FormInstall sty={currentTheme} />}
-      style={{ marginTop: '10px', marginBottom: '10px' }}
+      className="my-[10px]"
     />
     {/* <CardComponent
       content={<CardContact sty={currentTheme} />}
-      style={{ marginTop: '10px', marginBottom: '10px' }}
+      className="my-[10px]"
     /> */}
   </div>
   )

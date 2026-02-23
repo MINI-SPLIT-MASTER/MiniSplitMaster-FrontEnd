@@ -1,0 +1,1213 @@
+.page.hide-title-area #Content, .no-content-padding #Content, .template-blank #Content, .under-construction #Content { padding-top: 5rem !important; }
+.ribbon{position:absolute;right:10px;top:-5px;z-index:1;overflow:hidden;width:75px;height:75px;text-align:right}
+.ribbon span::after{content:'';position:absolute;right:0%;top:100%;z-index:-1;border-right:3px solid #79A70A;border-left:3px solid #fff0;border-bottom:3px solid #fff0;border-top:3px solid #79A70A}
+.ribbon span{font-size:10px;color:#fff;text-transform:uppercase;text-align:center;font-weight:700;line-height:20px;transform:rotate(45deg);width:100px;display:block;background:#79A70A;background:linear-gradient(#9BC90D 0%,#79A70A 100%);box-shadow:0 3px 10px -5px rgb(0 0 0);position:absolute;top:19px;right:-21px}
+.ribbon span::before{content:'';position:absolute;left:0;top:100%;z-index:-1;border-left:3px solid #79A70A;border-right:3px solid #fff0;border-bottom:3px solid #fff0;border-top:3px solid #79A70A}
+.red span{background:linear-gradient(#75b1bf 0%,#5d94a0 100%)}
+.red span::before{border-left-color:#5d94a0;border-top-color:#5d94a0}
+.red span::after{border-right-color:#5d94a0;border-top-color:#5d94a0}
+.product-tag {font-size: 0.8rem;font-weight: bold;text-transform: uppercase;letter-spacing: 0.5px;box-shadow: 1px 1px 3px rgba(0,0,0,0.2);z-index: 1;}
+.product-tag.ribbon {clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);padding-right: 1.5rem;}
+.product-tag.rounded {border-radius: 15px !important;}
+.product-tag.bordered {border: 2px solid white;}
+.product-tag.rounded.color-red {background: linear-gradient(#F70505 0%,#8F0808 100%);}
+.contener span {font-size: 10px;color: #fff;text-transform: uppercase;text-align: center;font-weight: 700;line-height: 20px;width: 100px;display: inline-block;background: #79A70A;background: linear-gradient(#9BC90D 0%, #79A70A 100%);box-shadow: 0 3px 10px -5px rgb(0 0 0);text-align: center;}
+/* Estilo general del contenedor del slider */
+.ff-el-group .rangeslider {
+    background: #e0e0e0; /* Color de la pista base */
+    border-radius: 5px;
+    height: 10px; /* Grosor de la pista */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    position: relative; /* Asegura que los elementos internos se posicionen correctamente */
+    margin-top: 20px; /* Ajusta la separación con la etiqueta */
+}
+
+/* Estilo de la barra de relleno (lo que ya se ha seleccionado) */
+.ff-el-group .rangeslider__fill {
+    background: #09a498; /* Color de la pista rellenada */
+    border-radius: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Estilo del manejador (el círculo o cuadrado que arrastras) */
+.ff-el-group .rangeslider__handle {
+    background: #ffffff; /* Color del manejador */
+    border: 2px solid #09a498; /* Borde del mismo color que la pista rellenada */
+    border-radius: 50%; /* Para hacerlo redondo */
+    cursor: grab;
+    width: 24px; /* Tamaño del manejador */
+    height: 24px; /* Tamaño del manejador */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: absolute; /* Para que se posicione sobre la pista */
+    margin-top: 2px; /* Ajusta para que quede centrado verticalmente con la pista */
+    transition: background-color 0.2s, border-color 0.2s; /* Transición suave al interactuar */
+}
+
+/* Estilo del manejador cuando está activo (arrastrando) */
+.ff-el-group .rangeslider__handle:active {
+    cursor: grabbing;
+    background: #13D1C1; /* Un tono más claro al hacer click */
+    border-color: #09a498; /* Un tono más oscuro del borde */
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+/* Estilo del valor mostrado (200 en tu ejemplo) */
+.ff-el-group .ff_range_value {
+    /* *** CAMBIOS AQUÍ *** */
+    font-size: 2em; /* Más grande */
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    /* Remover margin-top para permitir posicionamiento absoluto o flexbox */
+    /* margin-top: 15px; */
+
+    /* Posicionamiento para colocarlo encima del slider */
+    position: absolute; /* Permite posicionamiento respecto al padre .ff_slider_wrapper */
+    top: 0; /* Ajusta este valor para moverlo más arriba */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino para el centrado perfecto */
+
+    padding: 5px 10px;
+    background-color: transparent; /* Fondo transparente */
+    /* background-color: #f9f9f9;  Si quieres un fondo sutil, descomenta esto */
+    border-radius: 4px;
+    /* display: inline-block; */ /* No necesario con position: absolute */
+    min-width: 60px; /* Ancho mínimo para el valor */
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */ /* Si no tiene fondo, la sombra no es útil */
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
+}
+
+/* Ajustes para la etiqueta del campo "Room size" */
+.ff-el-group .ff-el-input--label label {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 5px; /* Mantén un margen inferior si quieres espacio con el slider */
+    display: block;
+}
+
+/* Asegura que el contenedor padre de .ff_range_value tenga position: relative */
+/* El HTML que me diste tiene <div class="ff_slider_wrapper"> que es el padre directo.
+   Necesitamos asegurarnos de que tenga position: relative para que el posicionamiento
+   absoluto de .ff_range_value funcione correctamente respecto a él. */
+.ff_slider_wrapper {
+    position: relative;
+    /* Agrega un padding-top para hacer espacio para el número que subirá */
+    padding-top: 40px; /* Ajusta este valor según sea necesario */
+}
+/* Para colocar un fondo blanco al div que contiene el contenido principal */
+.section_wrapper .the_content_wrapper {
+    background-color: #ffffff; /* Blanco puro */
+    /* Opcional: añadir algo de padding para que el contenido no esté pegado a los bordes */
+    padding: 20px 40px 20px 40px;
+	border-radius: 10px;
+    /* Opcional: añadir un poco de sombra sutil si lo deseas */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+/* Estilos para el contenedor del enlace */
+.only-circle {
+    text-align: center;
+    margin: 10px 12px 0;
+}
+
+/* Estilos para el círculo completo y el centrado del '+' */
+.circle-plus {
+    /* Aquí corregimos el display para que Flexbox funcione */
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    
+    width: 50px;
+    height: 50px;
+		margin: 0 auto;
+    
+    border-radius: 50%;
+    background-color: #41757e;
+    
+    text-decoration: none;
+    font-style: normal;
+    
+    cursor: pointer;
+    
+    /* Propiedades para el signo de suma dentro del círculo */
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.circle-plus:hover {
+    background-color: #3dada5;
+}
+
+.go-home-button:hover {
+  background-color: #777777 !important; /* Cambia a un gris más oscuro */
+  color: #eeeeee !important;           /* Opcional: cambia el color del texto */
+}
+.attachment-quick_view_image_size .size-quick_view_image_size {
+    max-width: 100%;
+    height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#yith-quick-view-content div.images img {
+	max-width: 100%;
+    height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#yith-quick-view-content div.images a {
+	max-width: 100%;
+    height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#yith-quick-view-content div.images {
+	max-width: 100%;
+    height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Estilo del control deslizante: posición de los números */
+.thwepof-range-field {
+    position: relative;
+    margin-top: 30px;
+}
+
+/* Marcador para el valor mínimo (5) */
+.thwepof-range-field::before {
+    content: '5';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    transform: translateX(-50%);
+    font-size: 12px;
+}
+
+/* Marcador para el valor máximo (150) */
+.thwepof-range-field::after {
+    content: '150';
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    transform: translateX(50%);
+    font-size: 12px;
+}
+
+.woocommerce-orders-table__cell-order-actions .woocommerce-button {
+    font-size: 16px !important;
+    padding: 8px 15px !important;
+	margin-bottom: 8px;
+	background-color: #09a498;
+}
+
+li.isotope-item.product {
+	background-color: #fff !important;
+	border-radius: 10px; /* Borde redondeado de 10px */
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra sutil */
+	transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+	height: 23rem;
+	display: flex; /* Permite una mejor alineación del contenido */
+	flex-direction: column; /* Organiza el contenido en una columna */
+	justify-content: space-between; /* Distribuye el espacio entre los elementos */
+	padding: 10px !important;
+
+}
+
+/* Limita la altura de las imágenes de los productos */
+li.isotope-item.product .image_frame img {
+	max-height: 10rem;
+	width: auto;
+	object-fit: contain; /* Asegura que la imagen no se distorsione */
+}
+
+
+
+/* Efecto al pasar el cursor (hover) */
+li.isotope-item.product:hover {
+	transform: translateY(-5px); /* Eleva el elemento ligeramente */
+	box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Aumenta la sombra */
+}
+
+
+/* Estilos para la tarjeta del producto */
+li.wc-block-grid__product {
+    background-color: #fff !important;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 23rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px !important;
+}
+
+/* Limita la altura del contenedor de la imagen */
+li.wc-block-grid__product .wc-block-grid__product-image {
+    height: 10rem;
+    display: flex;
+    align-items: center; /* Centra la imagen verticalmente */
+    justify-content: center; /* Centra la imagen horizontalmente */
+}
+
+/* Estilos para la imagen del producto */
+li.wc-block-grid__product .wc-block-grid__product-image img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Efecto al pasar el cursor (hover) */
+li.wc-block-grid__product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.wp-block-button__link.add_to_cart_button {
+    background-color: #09a498; /* Color de fondo, por ejemplo, un azul */
+    color: #ffffff; /* Color del texto, por ejemplo, blanco */
+    border-color: #007bff; /* Mantiene el borde del mismo color que el fondo */
+}
+
+.wp-block-button__link.add_to_cart_button:hover {
+    background-color: #22877f; /* Un tono más oscuro para el efecto al pasar el cursor */
+}
+
+
+.product-specs-wrapper {
+	gap: 30px;	
+}
+
+.product-specs-container {
+	font-family: Inter, sans-serif;
+	background-color: #e9ebea;
+	padding: 15px;
+	margin-top: 10px;
+	border-radius: 10px;
+}
+
+/* --- Estilos para la barra desplegable (UNIFICADOS) --- */
+.specs-dropdown-trigger {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	padding: 10px;
+	background-color: #f3f4f4;
+	border-radius: 8px;
+}
+
+.specs-dropdown-trigger h4 {
+	margin: 0;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.dropdown-icon {
+	font-size: 1.5em;
+	line-height: 1;
+	transform: rotate(0deg);
+	transition: transform 0.3s ease;
+}
+
+.dropdown-icon.expanded {
+	transform: rotate(45deg);
+}
+
+/* --- Estilos para el contenido (UNIFICADOS) --- */
+.specs-content {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.5s ease-out;
+	padding-top: 0;
+}
+
+.specs-content.expanded {
+	max-height: 100%; /* Un valor grande para mostrar todo el contenido */
+	padding-top: 15px;
+}
+
+/* --- Estilos de los elementos internos (SIN CAMBIOS) --- */
+.spec-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 15px;
+}
+
+.spec-item {
+	display: flex;
+	justify-content: space-between;
+}
+
+.spec-label {
+	font-weight: bold;
+	color: #555;
+}
+
+.spec-value {
+	color: #333;
+}
+
+.final-price-group {
+	justify-content: center;
+	border-top: 2px dashed #bbb;
+	padding-top: 20px;
+}
+
+.final-price-label {
+	font-size: 1.2em;
+	color: #333;
+}
+
+.final-price-value {
+	font-size: 1.8em;
+	color: #28a745;
+	font-weight: bold;
+}
+
+
+
+
+.poptin-credit {
+    /* Mantiene las propiedades del plugin pero añade un contexto de posicionamiento */
+    position: relative !important;
+}
+
+.poptin-credit::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+	border-radius: 10px;
+    background-color: #F3F4F4; /* El color del cuadro que lo tapa */
+    z-index: 100001 !important; /* Asegura que esté por encima de todo */
+}
+
+
+
+
+
+/* Oculta los círculos de los radio buttons solo dentro de la clase select_unit */
+.select_unit .ff-el-form-check-input[type="radio"] {
+	display: none !important;
+}
+
+/* Estilo de la tarjeta al pasar el mouse por encima */
+.select_unit .ff-el-form-check-label:hover {
+	border-color: #a4a4a4 !important;
+}
+
+.select_unit .ff-el-form-check-label.selected {
+    border: 3px solid #09a498 !important;
+    box-shadow: 0 0 10px rgba(9, 164, 152, 0.2);
+    border-radius: 10px !important;
+}
+
+
+/* Esta regla oculta todo el contenedor que tiene la clase hidden_radio */
+.ff-t-container.hidden_radio {
+    display: none !important;
+}
+
+/* Opcional: Si la anterior no funciona, prueba con esta más específica */
+.ff-t-container.ff_columns_total_2.hidden_radio {
+    display: none !important;
+}
+
+
+
+
+
+/* Estilos generales de la tarjeta del producto */
+.product-card {
+    font-family: Inter, sans-serif;
+    background-color: #F3F4F4;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Estilos para el título del producto */
+.product-title-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.product-title-container h4 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.product-title-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-details-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center; /* Centra horizontalmente los hijos */
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+/* Estilos para la imagen y el precio */
+.product-image-block {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.product-image-block img {
+    height: 200px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.product-price {
+    margin-top: 10px;
+}
+
+.product-price h5 {
+    display: inline-block;
+    margin: 0;
+}
+
+/* Estilos para la información y el botón */
+.product-info-block {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-tag-container {
+    margin-bottom: 10px;
+}
+
+.product-tag-rounded {
+    background: #6dc5d8;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+}
+
+.product-action-button {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.product-action-button button {
+    background-color: #6cbdb6;
+    color: #ffffff;
+    padding: 8px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.bg-total {
+	background: #7a7a7abe;
+    width: 100vw; /* '100vw' toma el 100% del ancho del viewport (pantalla) */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 15px 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 18px;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0px;
+}
+
+.fcal_timezone_selector .selected-item {
+    visibility: hidden;
+    position: relative;
+}
+
+.fcal_timezone_selector .selected-item::after {
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "Eastern Time (ET)"; 
+}
+
+/* Centra la tabla de detalles de la reserva */
+.fcal_form_booking_details table {
+    margin: 0 auto;
+}
+
+/* Oculta solo el texto de "America/New_York" y lo reemplaza con "Florida" */
+.fcal_form_booking_details table tr:last-child td {
+    visibility: hidden;
+    position: relative;
+}
+
+.fcal_form_booking_details table tr:last-child td::after {
+    visibility: visible;
+    position: absolute;
+	left: 37%;
+    content: "Eastern Time (ET)";
+}
+
+/* Oculta el texto de "America/New_York" al lado del icono */
+.slot_timezone span {
+    visibility: hidden;
+    position: relative;
+}
+
+.slot_timezone span::after {
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "Eastern Time (ET)";
+}
+
+
+
+
+
+.ffp_table th,
+.ffp_table td {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+/* Estilo del contenedor principal */
+.ff-payment_summary_component {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la cabecera (incluye fondo gris y borde inferior) */
+.ff_payment_summary thead {
+    background: #f0f0f0;
+    border-radius: 10px 10px 0 0; /* Bordes redondeados solo arriba */
+}
+
+/* Oculta las columnas de "Price" y "Qty" en la cabecera */
+.ff_payment_summary thead tr th:nth-child(2),
+.ff_payment_summary thead tr th:nth-child(3) {
+    display: none;
+}
+
+/* Estilo para los textos de la cabecera */
+.ff_payment_summary thead tr th {
+    padding: 15px;
+    color: #444;
+}
+
+/* Oculta las celdas de "Price" y "Qty" en el cuerpo de la tabla */
+.ff_payment_summary tbody tr td:nth-child(2),
+.ff_payment_summary tbody tr td:nth-child(3) {
+    display: none;
+}
+
+/* Remueve los bordes internos de la tabla */
+.ff_payment_summary table,
+.ff_payment_summary table tr td {
+    border: none !important;
+}
+
+/* Estilo para las filas de productos */
+.ff_payment_summary tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Estilo para los datos de los productos */
+.ff_payment_summary tbody tr td {
+    font-size: 16px;
+    color: #444;
+    padding: 15px;
+}
+        
+/* Alinea los textos a la derecha */
+.ff_payment_summary tbody tr td:last-child,
+.ff_payment_summary tfoot tr td:last-child {
+    text-align: right;
+    font-weight: bold;
+}
+        
+/* Estilo para la fila del Subtotal */
+.summary-subtotal th, .summary-subtotal td {
+    font-size: 16px !important;
+    padding-top: 15px;
+	border-bottom: none !important;
+}
+        
+/* Estilo para la fila de Instalación Gratuita */
+.summary-free-install th, .summary-free-install td {
+    color: #09a498; /* Color verde para el texto "FREE" */
+    font-size: 16px;
+    padding-top: 5px;
+	border-bottom: 1px solid #e0e0e0 !important;
+}
+
+/* Estilo para la fila del Total */
+.ff_payment_summary tfoot tr {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Estilo para los datos del Total */
+.ff_payment_summary tfoot tr th,
+.ff_payment_summary tfoot tr td {
+    color: #000 !important;
+    padding: 15px;
+}
+
+.item_left_install {
+	display: flex;
+	left: 0;
+	font-size: 16px !important;
+	font-weight: normal !important;
+}
+
+
+/* Estilo del contenedor principal */
+.price_sum {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+
+/* Estilo para el label del campo */
+.price_sum .ff-el-input--label {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilo para el grupo de input (input y el símbolo de $) */
+.price_sum .ff_input-group {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el prefijo de texto (el símbolo de 'Price: $') */
+.price_sum .ff_input-group-prepend .ff_input-group-text {
+    background-color: #e9ecef;
+    border: none;
+    padding: 12px 15px;
+    font-size: 1em;
+    color: #555555;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+/* Estilo para el campo de texto del precio */
+.price_sum .ff-el-form-control {
+    border: none;
+    padding: 12px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #09a498;
+    background-color: transparent;
+    width: 100%;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    text-align: right;
+}
+
+/* Quitar la flecha de la entrada de texto en algunos navegadores */
+.price_sum .ff-el-form-control[type="text"]::-webkit-outer-spin-button,
+.price_sum .ff-el-form-control[type="text"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.price_sum .ff-el-form-control[type="text"] {
+    -moz-appearance: textfield;
+}
+
+
+
+/* Estilo del contenedor principal 1*/
+.price_sum1 {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+
+/* Estilo para el label del campo */
+.price_sum1 .ff-el-input--label {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilo para el grupo de input (input y el símbolo de $) */
+.price_sum1 .ff_input-group {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el prefijo de texto (el símbolo de 'Price: $') */
+.price_sum1 .ff_input-group-prepend .ff_input-group-text {
+    background-color: #e9ecef;
+    border: none;
+    padding: 12px 15px;
+    font-size: 1em;
+    color: #555555;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+/* Estilo para el campo de texto del precio */
+.price_sum1 .ff-el-form-control {
+    border: none;
+    padding: 12px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #09a498;
+    background-color: transparent;
+    width: 100%;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    text-align: right;
+}
+
+/* Quitar la flecha de la entrada de texto en algunos navegadores */
+.price_sum1 .ff-el-form-control[type="text"]::-webkit-outer-spin-button,
+.price_sum1 .ff-el-form-control[type="text"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.price_sum1 .ff-el-form-control[type="text"] {
+    -moz-appearance: textfield;
+}
+
+
+
+.galeria-container {
+    position: relative;
+    width: 100%;
+}
+
+.galeria-botones {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.galeria-botones button {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.galeria-botones button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.galeria-imagenes {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    -webkit-overflow-scrolling: touch; /* Para un mejor desplazamiento en dispositivos móviles */
+}
+
+/* Ocultar la barra de desplazamiento en navegadores */
+.galeria-imagenes::-webkit-scrollbar {
+    display: none;
+}
+.galeria-imagenes {
+    -ms-overflow-style: none; /* IE y Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.galeria-imagenes img {
+    height: 300px;
+    flex-shrink: 0; /* Evita que las imágenes se encojan */
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+
+
+/* Contenedor del Mensaje de Confirmación (Basado en la imagen) */
+.confirmation-message-box {
+    /* Fondo limpio y esquinas redondeadas */
+    background-color: #ffffff;
+    border-radius: 10px; 
+    
+    /* Sombra para que destaque sobre el fondo gris claro */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    
+    /* Espaciado interno generoso */
+    padding: 30px;
+    max-width: 500px; /* Ancho para que no ocupe toda la página */
+    margin: 40px auto; /* Centra el bloque horizontalmente */
+    
+    /* La línea verde prominente que se ve en la imagen */
+    border-left: 6px solid #28a745; 
+    
+    /* Opcional: Estilo de texto */
+    font-family: Arial, sans-serif;
+    font-size: 1.15em;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* El elemento con el icono/símbolo de fondo (el círculo verde claro) */
+.confirmation-message-box::before {
+    content: '✓'; /* Usamos un checkmark simple en lugar de un icono */
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 2em; /* Tamaño del checkmark */
+    color: rgba(40, 167, 69, 0.2); /* Color verde muy claro y transparente */
+    z-index: 1; 
+}
+
+/* Ajuste del texto para que no se superponga al pseudo-elemento */
+.confirmation-message-box p {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    padding-left: 40px; /* Empuja el texto a la derecha del checkmark virtual */
+}
+
+
+
+
+
+/* --- Estilos para la Consulta de Órdenes --- */
+
+/* Contenedor principal */
+.consulta-orden-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #333;
+    max-width: 700px;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+/* Estilos del formulario de búsqueda */
+.formulario-consulta-orden {
+    background-color: #f9f9f9;
+    padding: 2em;
+    border-radius: 8px;
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.formulario-consulta-orden h2 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-size: 1.8em;
+    color: #2c3e50;
+}
+
+.formulario-consulta-orden p {
+    margin-bottom: 1.5em;
+    color: #555;
+}
+
+.form-consulta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-consulta label {
+    display: none; /* Ocultamos la etiqueta, el placeholder es suficiente */
+}
+
+.form-consulta input[type="text"] {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    width: 220px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-consulta input[type="text"]:focus {
+    outline: none;
+    border-color: #0073aa;
+    box-shadow: 0 0 5px rgba(0, 115, 170, 0.2);
+}
+
+.form-consulta input[type="submit"] {
+    padding: 12px 20px;
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-consulta input[type="submit"]:hover {
+    background-color: #005a87;
+}
+
+/* Estilos para la tarjeta de resultados */
+.resultado-consulta-orden {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden; /* Para que el header se vea bien */
+}
+
+.orden-card-header {
+    background-color: #f7f7f7;
+    padding: 1em 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.orden-card-header h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: #2c3e50;
+}
+
+.orden-card-body {
+    padding: 1.5em;
+}
+
+.detalle-seccion-titulo {
+    font-size: 1.2em;
+    color: #0073aa;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.detalle-fila {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8em 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+.detalle-fila:last-child {
+    border-bottom: none;
+}
+
+.detalle-fila strong {
+    color: #444;
+}
+
+.detalle-fila span {
+    color: #555;
+    text-align: right;
+}
+
+/* Etiqueta de estado (Badge) */
+.orden-estado {
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.estado-pendiente { background-color: #f0ad4e; }
+.estado-completado { background-color: #5cb85c; }
+.estado-en-proceso { background-color: #337ab7; }
+.estado-cancelado { background-color: #d9534f; }
+.estado-default { background-color: #777; }
+
+
+/* Mensaje de error */
+.orden-error-mensaje {
+    background-color: #fbeaea;
+    color: #a94442;
+    padding: 1em 1.5em;
+    border: 1px solid #eacccc;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.button-orden {
+	background-color: #09a498 !important;
+	color: 'white';
+}
+
+.section.mcb-section.the_content.no_content {
+    display: none !important;
+}
+
+#Footer {
+	background-color: #ffffff !important;
+}
+
+.widgets_wrapper {
+    padding: 0 !important;
+}
+
+.column.one.mobile-one {
+    padding-top: 0 !important;
+}
+
+/* Esto fuerza a que las etiquetas y el texto del formulario sean oscuros */
+#wpcf7-f1-p14-o1 label,
+#wpcf7-f1-p14-o1 p {
+    color: #333333 !important; /* Un gris oscuro, cámbialo a #000000 si quieres negro puro */
+}
+
+/* Asegura que las opciones del radio button también sean visibles (para Residential/Commercial) */
+#wpcf7-f1-p14-o1 .wpcf7-list-item-label {
+    color: #333333 !important;
+}
+
+.wpcf7-submit {
+    color: #ffffff !important;
+	font-weight: bold !important;
+}
+
+.limitar-linea {
+    display: block !important;
+    width: 100% !important;
+    max-width: 280px;  /* Ajusta según el ancho de tu columna */
+    margin: 0;         /* Alinea la caja a la izquierda */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-align: left;  /* Alinea el texto a la izquierda */
+}
+
+
+
+
+
+
+
+
+
+/* Animación hover para la tarjeta completa */
+.mini-split-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Animación de entrada para cada spec item */
+.specs-slide-panel .spec-item {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.specs-slide-panel .spec-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.specs-slide-panel .spec-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.specs-slide-panel .spec-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.specs-slide-panel .spec-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .mini-split-card {
+        margin: 10px 0;
+    }
+    
+    .specs-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .mini-split-card img {
+        height: 160px !important;
+    }
+    
+    /* En móviles, mostrar las specs siempre */
+    .specs-slide-panel {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Animación suave para el botón */
+.see-more-btn:active {
+    transform: scale(0.98) !important;
+}
+
+/* Efecto de brillo en el badge */
+.product-badge span {
+    animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.9;
+    }
+}

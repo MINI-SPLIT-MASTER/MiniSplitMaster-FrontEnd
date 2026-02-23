@@ -2,6 +2,7 @@
 import { ThemeProvider as CustomThemeProvider } from "./common/ThemeContext";
 import { RoutesComponents } from "./routes/index"
 import { FooterPage, HeaderPage } from "./common/PageElements";
+import { ToastManager } from "./components/ui/alert";
 import { useState } from "react";
 
 
@@ -12,21 +13,32 @@ export const App = () => {
 
   return (
     <CustomThemeProvider>
-      <div style={{ background: bgColor }}>
-        <header 
-          className="p-0 h-16 sticky top-0 z-50"
-        >
+      <ToastManager />
+      <div
+        style={{
+          background: bgColor,
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <header className="p-0 h-16 sticky top-0 z-50">
           <HeaderPage currentThemePage={currentThemePage} setCurrentThemePage={setCurrentThemePage} />
         </header>
-        <main 
-          className=""
-          style={{ fontFamily: "'Inter', sans-serif" }}
+        <main
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            flex: 1,
+            width: '100%',
+            minHeight: 0,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+          className="min-h-[75vh] w-full"
         >
-          <RoutesComponents/>
+          <RoutesComponents />
         </main>
-        <footer 
-          className="relative"
-        >
+        <footer className="relative">
           <FooterPage />
         </footer>
       </div>

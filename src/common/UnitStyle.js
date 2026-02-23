@@ -1,158 +1,380 @@
+import "./styles.css";
+import { useState } from "react";
+
 export const UnitStyle = ({ data, sty, style, ...props }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div
+      className="mini-split-card"
       style={{
-        background: "linear-gradient(135deg, #e0f7fa 0%, #f3f4f4 100%)",
-        borderRadius: "16px",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
-        display: "flex",
-        alignItems: "center",
-        padding: "28px 24px",
-        boxSizing: "border-box",
-        flexDirection: "column",
-        margin: 0,
+        background: '#FFFFFF',
+        borderRadius: '16px',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+        overflow: 'hidden',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+        position: 'relative',
         ...style,
-        ...sty,
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
-      <div
-        style={{
-          fontFamily: "Inter, sans-serif",
-          textAlign: "center",
-          marginBottom: "18px",
-        }}
-      >
-        <h4 style={{ margin: 0, fontSize: "1.2em", fontWeight: 600, color: "#2d3a4a" }}>
-          <a
-            style={{ textDecoration: "none", color: "inherit" }}
-            href="https://minisplitmaster.us/product/all-easy-pro-wall-mounted-split-msehu-h12b-2a/"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Badge de "BEST" - Posicionado arriba */}
+      <div style={{ position: 'relative' }}>
+        <div
+          className="product-badge"
+          style={{
+            position: 'absolute',
+            top: '15px',
+            left: '15px',
+            zIndex: 2,
+          }}
+        >
+          <span
+            className="product-tag rounded"
+            style={{
+              background: 'linear-gradient(135deg, #6dc5d8 0%, #5ba7b5 100%)',
+              color: '#ffffff',
+              padding: '6px 16px',
+              borderRadius: '20px',
+              fontSize: '0.75em',
+              fontWeight: '700',
+              letterSpacing: '0.5px',
+              boxShadow: '0 2px 8px rgba(109, 197, 216, 0.3)',
+              textTransform: 'uppercase',
+            }}
           >
-            All Easy Pro Wall – Mounted Split – MSEHU-H12B-2A / MO1ES-H12B-2A
-          </a>
-        </h4>
-      </div>
-      <div className="product-details-main" style={{ display: "flex", gap: "32px" }}>
+            BEST SELLER
+          </span>
+        </div>
+
+        {/* Imagen del producto */}
         <div
           style={{
-            flexShrink: 0,
-            textAlign: "center",
-            marginLeft: "0",
-            background: "#fff",
-            borderRadius: "12px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-            padding: "16px",
+            background: 'linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%)',
+            padding: '40px 20px 20px',
+            textAlign: 'center',
+            transition: 'transform 0.4s ease',
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
           }}
         >
           <img
+            className="img-responsiva"
+            src="https://minisplitmaster.us/wp-content/uploads/2025/10/Midea-All-Easy-Pro-e1756498692370-removebg-preview.png"
+            alt="All Easy Pro Wall Mounted Split"
             style={{
-              height: "180px",
-              width: "auto",
-              display: "block",
-              margin: "0 auto 12px auto",
-              borderRadius: "8px",
-              background: "#f8fafb",
+              height: '200px',
+              width: 'auto',
+              maxWidth: '100%',
+              objectFit: 'contain',
+              margin: '0 auto',
+              filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1))',
             }}
-            src="https://minisplitmaster.us/wp-content/uploads/2025/06/Midea-All-Easy-Pro-e1756498692370.png"
-            alt="All Easy Pro Wall – Mounted Split"
           />
-          <div style={{ margin: "10px 0 0 0" }}>
-            <h5
-              style={{
-                display: "inline-block",
-                margin: 0,
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 500,
-                color: "#388e7d",
-                fontSize: "1.05em",
-                letterSpacing: "0.5px",
-              }}
-            >
-              PRICE: <span className="price-new" style={{ color: "#e57373", fontWeight: 700 }}> $1,707.38 </span>
-            </h5>
-          </div>
         </div>
-        <div
+      </div>
+
+      {/* Contenido del producto */}
+      <div style={{ padding: '20px', position: 'relative' }}>
+        {/* Título del producto */}
+        <h4
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            gap: "18px",
-            minWidth: "220px",
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '1.1em',
+            fontWeight: '600',
+            color: '#2c3e50',
+            margin: '0 0 15px 0',
+            lineHeight: '1.4',
+            minHeight: '2.8em',
           }}
         >
+          All Easy Pro Wall Mounted Split
+        </h4>
+
+        {/* Modelo */}
+        <p
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.85em',
+            color: '#7f8c8d',
+            margin: '0 0 20px 0',
+          }}
+        >
+          Model: MSEHU-H12B-2A / MO1ES-H12B-2A
+        </p>
+
+        {/* Contenedor de especificaciones con animación */}
+        <div
+          style={{
+            position: 'relative',
+            height: '140px',
+            marginBottom: '20px',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Panel de especificaciones deslizante */}
           <div
-            className="rating-wrap"
+            className="specs-slide-panel"
             style={{
-              paddingTop: "0",
-              fontFamily: "Inter, sans-serif",
-              textAlign: "left",
-              color: "#2d3a4a",
-              fontSize: "1em",
-              lineHeight: 1.7,
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              width: '100%',
+              height: '100%',
+              transform: isHovered ? 'translateX(0)' : 'translateX(100%)',
+              opacity: isHovered ? 1 : 0,
+              transition: 'transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease',
+              background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+              borderRadius: '10px',
+              padding: '15px',
+              boxShadow: isHovered ? '0 4px 15px rgba(0, 0, 0, 0.1)' : 'none',
             }}
           >
             <div
-              className="contener"
+              className="specs-grid"
               style={{
-                textAlign: "left",
-                marginBottom: "10px",
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '12px',
+                height: '100%',
               }}
             >
-              <span
-                className="product-tag rounded"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  background: "linear-gradient(90deg, #6dc5d8 60%, #6cbdb6 100%)",
-                  color: "#fff",
-                  padding: "4px 14px",
-                  borderRadius: "16px",
-                  fontWeight: 600,
-                  fontSize: "0.95em",
-                  letterSpacing: "1px",
-                  boxShadow: "0 1px 4px rgba(108,189,182,0.08)",
-                }}
-              >
-                BEST
-              </span>
-            </div>
-            <div>
-              <strong>Cooling BTU's:</strong> 12,000<br />
-              <strong>Heating BTU's:</strong> 12,000<br />
-              <strong>SEER:</strong> 25.5<br />
-              <strong>Power:</strong> 208-230V/60
+              <div className="spec-item">
+                <div
+                  style={{
+                    fontSize: '0.75em',
+                    color: '#7f8c8d',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                    marginBottom: '4px',
+                    fontWeight: '600',
+                  }}
+                >
+                  Cooling BTU
+                </div>
+                <div
+                  style={{
+                    fontSize: '1.1em',
+                    color: '#2c3e50',
+                    fontWeight: '700',
+                  }}
+                >
+                  12,000
+                </div>
+              </div>
+
+              <div className="spec-item">
+                <div
+                  style={{
+                    fontSize: '0.75em',
+                    color: '#7f8c8d',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                    marginBottom: '4px',
+                    fontWeight: '600',
+                  }}
+                >
+                  Heating BTU
+                </div>
+                <div
+                  style={{
+                    fontSize: '1.1em',
+                    color: '#2c3e50',
+                    fontWeight: '700',
+                  }}
+                >
+                  12,000
+                </div>
+              </div>
+
+              <div className="spec-item">
+                <div
+                  style={{
+                    fontSize: '0.75em',
+                    color: '#7f8c8d',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                    marginBottom: '4px',
+                    fontWeight: '600',
+                  }}
+                >
+                  SEER Rating
+                </div>
+                <div
+                  style={{
+                    fontSize: '1.1em',
+                    color: '#09a498',
+                    fontWeight: '700',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                  }}
+                >
+                  25.5
+                  <span
+                    title="Seasonal Energy Efficiency Ratio - Higher is better"
+                    style={{
+                      cursor: 'help',
+                      fontSize: '0.8em',
+                      color: '#09a498',
+                    }}
+                  >
+                    ⓘ
+                  </span>
+                </div>
+              </div>
+
+              <div className="spec-item">
+                <div
+                  style={{
+                    fontSize: '0.75em',
+                    color: '#7f8c8d',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                    marginBottom: '4px',
+                    fontWeight: '600',
+                  }}
+                >
+                  Power
+                </div>
+                <div
+                  style={{
+                    fontSize: '1.1em',
+                    color: '#2c3e50',
+                    fontWeight: '700',
+                  }}
+                >
+                  208-230V
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* Indicador "Hover for specs" cuando no está en hover */}
           <div
-            className="only-circle"
             style={{
-              textAlign: "left",
-              marginTop: "0",
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: `translate(-50%, -50%) scale(${isHovered ? 0 : 1})`,
+              opacity: isHovered ? 0 : 1,
+              transition: 'opacity 0.3s ease, transform 0.3s ease',
+              textAlign: 'center',
+              pointerEvents: 'none',
             }}
           >
-            <button
-              className="all-easy-pro-wall-mounted-split-msehu-h12b-2a-mo1es-h12b-2a"
+            <div
               style={{
-                background: "linear-gradient(90deg, #6cbdb6 60%, #6dc5d8 100%)",
-                color: "#fff",
-                padding: "10px 36px",
-                border: "none",
-                borderRadius: "24px",
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 600,
-                fontSize: "1em",
-                cursor: "pointer",
-                boxShadow: "0 2px 8px rgba(108,189,182,0.10)",
-                transition: "background 0.2s",
+                background: 'linear-gradient(135deg, #09a498 0%, #087e75 100%)',
+                color: '#ffffff',
+                padding: '12px 24px',
+                borderRadius: '25px',
+                fontSize: '0.85em',
+                fontWeight: '600',
+                boxShadow: '0 4px 12px rgba(9, 164, 152, 0.25)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
               }}
-              type="button"
             >
-              See more
-            </button>
+              <span>🔍</span>
+              Hover to see specifications
+            </div>
           </div>
+        </div>
+
+        {/* Banner de instalación incluida */}
+        <div
+          style={{
+            background: 'linear-gradient(135deg, #e8f5f4 0%, #d4ede9 100%)',
+            padding: '12px',
+            borderRadius: '8px',
+            marginBottom: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            transition: 'transform 0.3s ease',
+            transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+          }}
+        >
+          <span style={{ fontSize: '1.2em' }}>✓</span>
+          <span
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '0.9em',
+              fontWeight: '600',
+              color: '#09a498',
+            }}
+          >
+            Installation Included
+          </span>
+        </div>
+
+        {/* Precio y botón */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '15px',
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: '0.75em',
+                color: '#7f8c8d',
+                marginBottom: '4px',
+                fontWeight: '600',
+              }}
+            >
+              Total Price
+            </div>
+            <div
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '1.8em',
+                fontWeight: '700',
+                color: '#2c3e50',
+              }}
+            >
+              $1,707
+              <span style={{ fontSize: '0.6em', color: '#7f8c8d' }}>.38</span>
+            </div>
+          </div>
+
+          <button
+            className="see-more-btn"
+            style={{
+              background: 'linear-gradient(135deg, #09a498 0%, #087e75 100%)',
+              color: '#ffffff',
+              border: 'none',
+              padding: '14px 28px',
+              borderRadius: '10px',
+              fontSize: '0.95em',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 12px rgba(9, 164, 152, 0.25)',
+              fontFamily: 'Inter, sans-serif',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px',
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            }}
+            type="button"
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'translateY(-2px) scale(1.05)';
+              e.target.style.boxShadow = '0 6px 16px rgba(9, 164, 152, 0.35)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = isHovered ? 'scale(1.05)' : 'scale(1)';
+              e.target.style.boxShadow = '0 4px 12px rgba(9, 164, 152, 0.25)';
+            }}
+          >
+            See Details
+          </button>
         </div>
       </div>
     </div>

@@ -2,3 +2,37 @@
 .custom-switch.ant-switch-checked {
   background-color: #09a498 !important; /* Por ejemplo, un color verde marino */
 }
+
+.nav-tab {
+  position: relative;
+}
+
+.nav-tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: var(--primaryColor, #09a498);
+  transition: width 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+.nav-tab.selected::after {
+  width: 100%;
+}
+
+.aspa-giratoria {
+  transform-origin: center;
+  transform-box: fill-box; 
+  transition: transform 0.3s ease;
+}
+
+.group:hover .aspa-giratoria {
+  animation: spin-slow 2.5s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
